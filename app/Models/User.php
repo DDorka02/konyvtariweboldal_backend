@@ -6,11 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,10 +20,31 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nev',
         'email',
         'password',
+        'telefon',
+        'varos',
+        'cim',
+        'szerep',
+        'aktiv'
     ];
+
+
+    public function konyveim()
+{
+    return $this->hasMany(FelhasznaloKonyv::class, 'felhasznalo_id');
+}
+
+public function kereseseim()
+{
+    return $this->hasMany(KonyvKeres::class, 'felhasznalo_id');
+}
+
+public function jelenteseim()
+{
+    return $this->hasMany(Jelentes::class, 'bejelento_id');
+}
 
     /**
      * The attributes that should be hidden for serialization.
