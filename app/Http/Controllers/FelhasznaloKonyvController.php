@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class FelhasznaloKonyvController extends Controller
 {
-    public function index()
+     public function index()
     {
-        // 🔥 CSAK a bejelentkezett felhasználó könyveit küldjük vissza
+        // 🔥 CSAK A BEJELENTKEZETT FELHASZNÁLÓ KÖNYVEIT ADJA VISSZA
         $felhasznaloKonyvek = FelhasznaloKonyv::with('konyv')
             ->where('felhasznalo_id', Auth::id())
             ->get();

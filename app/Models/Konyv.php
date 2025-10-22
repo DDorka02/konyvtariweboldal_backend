@@ -18,5 +18,14 @@ class Konyv extends Model
         'cim', 'szerzo', 'kiado', 'kiadas_ev', 
         'kategoria', 'leiras', 'kep', 'allapot'
     ];
+
+    public function getKepUrlAttribute()
+    {
+        if (!$this->kep) {
+            return null;
+        }
+        
+        return asset('storage/' . $this->kep);
+    }
     
 }
