@@ -24,8 +24,8 @@ class FelhasznaloKonyv extends Model
     }
 
     // 🔥 Reláció a felhasználóhoz
-    public function felhasznalo()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'felhasznalo_id');
+        return $this->belongsTo(User::class, 'felhasznalo_id', 'azonosito');
     }
 }

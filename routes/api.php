@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\FelhasznaloKonyvController;
 use App\Http\Controllers\JelentesController;
 use App\Http\Controllers\KicserelesController;
@@ -10,8 +11,21 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// CSAK A LOGIN NINCS VÉDVE
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::middleware('guest')->group(function () {
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
+});
+
+Route::middleware('auth:sanctum')->post('/update-user/{user}', [UserController::class, 'update'])->name('update-user');
+Route::middleware('auth:sanctum')->get('/get-user/{id}', [UserController::class, 'getUser']);
+Route::middleware('auth:sanctum')->post('/update-password', [UserController::class, 'updatePassword']);
 
 // MINDEN MÁS ROUTE VÉDELT
 Route::middleware('auth:sanctum')->group(function () {

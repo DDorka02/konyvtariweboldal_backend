@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('statusz', ['aktiv', 'inaktiv'])->default('aktiv');
             $table->timestamps();
 
-            $table->foreign('felhasznalo_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('felhasznalo_id')->references('azonosito')->on('users')->onDelete('cascade');
             $table->foreign('konyv_id')->references('konyv_id')->on('konyveks')->onDelete('cascade');
         });
     }

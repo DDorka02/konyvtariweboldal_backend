@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('megjegyzes')->nullable(); // pl. "kissé kopott a sarka"
             $table->timestamps();
 
-            $table->foreign('felhasznalo_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('felhasznalo_id')->references('azonosito')->on('users')->onDelete('cascade');
             $table->foreign('konyv_id')->references('konyv_id')->on('konyveks')->onDelete('cascade');
         });
     }

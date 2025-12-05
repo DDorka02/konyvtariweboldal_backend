@@ -28,9 +28,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@konyvtarcsere.hu',
             'password' => Hash::make('admin123'),
-            'telefon' => '+36301234567',
-            'varos' => 'Budapest',
-            'cim' => 'Admin utca 1.',
             'szerep' => 'admin',
         ]);
 
@@ -38,9 +35,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Kiss János',
             'email' => 'kiss.janos@example.com',
             'password' => Hash::make('password123'),
-            'telefon' => '+36309876543',
-            'varos' => 'Debrecen',
-            'cim' => 'Petőfi utca 12.',
             'szerep' => 'felhasznalo',
         ]);
 
@@ -48,9 +42,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Nagy Anna',
             'email' => 'nagy.anna@example.com',
             'password' => Hash::make('password123'),
-            'telefon' => '+36201234567',
-            'varos' => 'Szeged',
-            'cim' => 'Kossuth tér 5.',
             'szerep' => 'felhasznalo',
         ]);
 
@@ -58,9 +49,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Tóth Gábor',
             'email' => 'toth.gabor@example.com',
             'password' => Hash::make('password123'),
-            'telefon' => '+36701234567',
-            'varos' => 'Pécs',
-            'cim' => 'Dóm tér 8.',
             'szerep' => 'felhasznalo',
         ]);
 
@@ -122,35 +110,35 @@ class DatabaseSeeder extends Seeder
 
         // 3. FELHASZNÁLÓK KÖNYVEI
         $fk1 = FelhasznaloKonyv::create([
-            'felhasznalo_id' => $user1->id,
+            'felhasznalo_id' => $user1->azonosito,
             'konyv_id' => $konyv1->konyv_id,
             'statusz' => 'elerheto',
             'megjegyzes' => 'Kissé kopott a sarka, de olvasható állapotú.',
         ]);
 
         $fk2 = FelhasznaloKonyv::create([
-            'felhasznalo_id' => $user1->id,
+            'felhasznalo_id' => $user1->azonosito,
             'konyv_id' => $konyv3->konyv_id,
             'statusz' => 'elerheto',
             'megjegyzes' => 'Tökéletes állapotú.',
         ]);
 
         $fk3 = FelhasznaloKonyv::create([
-            'felhasznalo_id' => $user2->id,
+            'felhasznalo_id' => $user2->azonosito,
             'konyv_id' => $konyv2->konyv_id,
             'statusz' => 'elerheto',
             'megjegyzes' => 'Új, még becsomagolva.',
         ]);
 
         $fk4 = FelhasznaloKonyv::create([
-            'felhasznalo_id' => $user3->id,
+            'felhasznalo_id' => $user3->azonosito,
             'konyv_id' => $konyv4->konyv_id,
             'statusz' => 'elerheto',
             'megjegyzes' => 'Pár hajtásnyom van benne.',
         ]);
 
         $fk5 = FelhasznaloKonyv::create([
-            'felhasznalo_id' => $user3->id,
+            'felhasznalo_id' => $user3->azonosito,
             'konyv_id' => $konyv5->konyv_id,
             'statusz' => 'foglalt',
             'megjegyzes' => 'A borítója kissé elnyűtt.',
@@ -158,21 +146,21 @@ class DatabaseSeeder extends Seeder
 
         // 4. KÖNYVKERESÉSEK
         KonyvKeres::create([
-            'felhasznalo_id' => $user2->id,
+            'felhasznalo_id' => $user2->azonosito,
             'konyv_id' => $konyv1->konyv_id,
             'statusz' => 'aktiv',
         ]);
 
         KonyvKeres::create([
-            'felhasznalo_id' => $user3->id,
+            'felhasznalo_id' => $user3->azonosito,
             'konyv_id' => $konyv2->konyv_id,
             'statusz' => 'aktiv',
         ]);
 
         // 5. CSERÉK
         Kicsereles::create([
-            'felado_id' => $user1->id,
-            'fogado_id' => $user2->id,
+            'felado_id' => $user1->azonosito,
+            'fogado_id' => $user2->azonosito,
             'felado_konyv_id' => $fk1->felhasznalo_konyv_id,
             'fogado_konyv_id' => $fk3->felhasznalo_konyv_id,
             'statusz' => 'fuggo',
@@ -180,7 +168,7 @@ class DatabaseSeeder extends Seeder
 
         // 6. JELENTÉSEK
         Jelentes::create([
-            'bejelento_id' => $user1->id,
+            'bejelento_id' => $user1->azonosito,
             'cel_konyv_id' => $konyv5->konyv_id,
             'tipus' => 'hamis_adat',
             'leiras' => 'A könyv állapota rosszabb, mint amennyire hirdetik.',

@@ -23,10 +23,10 @@ return new class extends Migration
             $table->text('admin_megjegyzes')->nullable();
             $table->timestamps();
 
-            $table->foreign('bejelento_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('cel_felhasznalo_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('bejelento_id')->references('azonosito')->on('users')->onDelete('cascade');
+            $table->foreign('cel_felhasznalo_id')->references('azonosito')->on('users')->onDelete('cascade');
             $table->foreign('cel_konyv_id')->references('konyv_id')->on('konyveks');
-            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_id')->references('azonosito')->on('users')->onDelete('cascade');
         });
     }
 

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->enum('statusz', ['fuggo', 'elfogadva', 'elutasitva', 'lezarva'])->default('fuggo');
             $table->timestamps();
 
-            $table->foreign('felado_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('fogado_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('felado_id')->references('azonosito')->on('users')->onDelete('cascade');
+            $table->foreign('fogado_id')->references('azonosito')->on('users')->onDelete('cascade');
             $table->foreign('felado_konyv_id')->references('felhasznalo_konyv_id')->on('felhasznalo_konyveks');
             $table->foreign('fogado_konyv_id')->references('felhasznalo_konyv_id')->on('felhasznalo_konyveks');
         });
